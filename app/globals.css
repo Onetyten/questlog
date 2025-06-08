@@ -7,11 +7,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --primary: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.968 0.007 247.896);
+  --foreground:#ffffff;
+  --background:#181318;
+  --primary: #ba8fff;
+  --secondary:#dddbe0;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -39,6 +39,10 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  
+
+
+
 
 }
 
@@ -85,8 +89,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-  --primary: #5033f0;
-  --secondary:#dadbe4;
+  --background:#ffffff;
+  --foreground:#181318;
+  --primary: #ba8fff;
+  --secondary:#dddbe0;
 
   }
 }
