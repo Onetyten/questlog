@@ -11,7 +11,7 @@ import Image from 'next/image';
 
 export default function Sidebar() {
   return (
-    <div className="bg-background border-r-2 flex flex-1 flex-col box-content justify-between border-secondary h-screen w-100 top-0 left-0">
+    <div className="bg-background border-r-2 flex flex-1  flex-col box-content justify-between border-secondary h-screen w-100 top-0 left-0">
         <div>
             <div className='flex justify-between items-center border-b-2 h-20 px-6'> 
                 <div className='flex gap-4 items-center'>

@@ -47,6 +47,7 @@ export default function Quotebar() {
                 }
                 else{
                     fetchQuotes()
+                    console.log("fetching quotes")
                 }
         }
     },[dispatch,lastFetchTimestamp,quoteRedux,fetchQuotes])

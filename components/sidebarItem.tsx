@@ -11,7 +11,7 @@ interface sidebarItemProps{
 export default function SidebarItem(prop:sidebarItemProps) {
     const {name,icon,active} = prop
   return (
-    <div className={`${active?"text-primary":"text-foreground"} flex w-full gap-6 text-lg items-center`}>
+    <div className={`${active?"text-primary":"text-foreground"} flex w-full gap-6 text-base items-center`}>
         {icon?(icon):(< MdKeyboardDoubleArrowLeft/>)}
         {name}
     </div>
