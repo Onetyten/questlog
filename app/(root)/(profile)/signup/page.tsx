@@ -3,9 +3,13 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+
 
 export default function page() {
 
+    const router = useRouter()
     const [name,setName] = useState('')
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -15,10 +19,53 @@ export default function page() {
     const [showPasswordError,setShowPasswordError] = useState(false)
     const [showPasswordLengthError,setShowPasswordLengthError] = useState(false)
 
-    function submit() {
+    async function submit() {
+        if (!name || name.trim().length<1){
+            setShowNameError(true)
+        }
+        else
+        {
+            setShowNameError(false)
+        }
 
+        if (!email || email.trim().length<1){
+            setShowEmailError(true)
+        }
+        else
+        {
+            setShowEmailError(false)
+        }
+        if (!password || password.trim().length<1){
+            setShowPasswordError(true)
+        }
+        else
+        {
+            setShowPasswordError(false)
+            if (password.trim().length<8){
+                setShowPasswordLengthError(true)
+            }
+            else
+            {
+                setShowPasswordLengthError(false)
+            }
+        }
+
+        if (name && name.trim().length>0 && email && email.trim().length>0 && password && password.trim().length>7 ){
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signup`, { name, email, password});
+
+            if (!res.data.success) {
+                console.log("Signup failed:", res.data?.message || "Unknown error");
+                return alert(res.data?.message || "Something went wrong");
+            } 
+            if (res.data.user.name && res.data.user.email && res.data.user._id)
+            {
+                console.log(res.data.user)
+                router.push('/signin')
+            }    
+        }
+     
         
-        console.log(name,email, password)
+        
         
     }
 

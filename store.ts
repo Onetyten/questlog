@@ -2,6 +2,7 @@ import {configureStore} from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import { persistReducer,persistStore } from 'redux-persist'
 import quoteSlice from '@/store/quoteSlice/quoteSlice'
+import userSlice from '@/store/userSlice/userSlice'
 import storage from 'redux-persist/lib/storage'
 
 
@@ -14,7 +15,8 @@ const persistConfig = {
 
 
 const reducer = combineReducers({
-    dailyQuote:quoteSlice
+    dailyQuote:quoteSlice,
+    user:userSlice
 })
 
 const persistedReducer = persistReducer(persistConfig,reducer)

@@ -1,8 +1,105 @@
-import React from 'react'
+/* eslint-disable react-hooks/rules-of-hooks */
+'use client'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { setUser } from '@/store/userSlice/userSlice'
+
+
+interface refreshTokenType{
+    _id:string,
+    createdAt:string,
+    device:string,
+    expiresAt:string,
+    token:string
+}
+
+interface userInterface {
+    _id:string,
+    name:string,
+    email:string,
+    refreshToken:refreshTokenType,
+    accessToken:string
+    
+}
+
 
 export default function page() {
+
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [confirmPassword,setConfirmPassword] = useState('')
+
+    const [showEmailError,setShowEmailError] = useState(false)
+    const [showPasswordError,setShowPasswordError] = useState(false)
+    const [showPasswordMatchError,setShowPasswordMatchError] = useState(false)
+    
+
+    const submit = async () => {
+        if (!email || email.trim().length<1){
+            setShowEmailError(true)
+        }
+        else
+        {
+            setShowEmailError(false)
+        }
+        if (!password || password.trim().length<1){
+            setShowPasswordError(true)
+        }
+        else
+        {
+            setShowPasswordError(false)
+        }
+        if (!confirmPassword || confirmPassword !== password){
+            setShowPasswordMatchError(true)
+        }
+        else
+        {
+            setShowPasswordMatchError(false)
+        }
+
+        if (email && email.trim().length>0 && password && password.trim().length>7 && confirmPassword && confirmPassword === password)
+        {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signin`, { email, password});
+
+            if (!res.data.success) {
+                console.log("Signin failed:", res.data?.message || "Unknown error");
+                return alert(res.data?.message || "Something went wrong");
+            }
+
+            if (res.data.user.id && res.data.user.name && res.data.user.email && res.data.token && res.data.refreshToken?.token)
+            {
+                const savedData:userInterface = {
+                    _id:res.data.user.id,
+                        name:res.data.user.name,
+                        email:res.data.user.email,
+                        refreshToken:res.data.refreshToken,
+                        accessToken:res.data.token
+                }
+
+                dispatch(setUser(savedData))
+                console.log(savedData)
+                router.push('/')
+            }
+            else
+            {
+                return alert("Something went wrong, retry")
+            }
+
+
+            
+        }
+
+
+
+    }
+
+
   return (
     <div className='bg-secondary h-screen w-full flex justify-center items-center '>
         <div className='flex bg-background w-9/12 h-10/12 relative shadow-lg'>
@@ -19,21 +116,24 @@ export default function page() {
                             <div className='flex flex-col gap-5'>
 
                                 <div>
-                                    <input type="email" placeholder='Email' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                    <input type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder='Email' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                    {showEmailError&&(<p className='text-sm text-red-600'>Email cannot be blank</p>)}    
                                 </div>
 
                                 <div>
-                                     <input type="password" placeholder='Password' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                     <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder='Password' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                     {showPasswordError&&(<p className='text-sm text-red-600'>password cannot be blank</p>)}    
                                 </div>
 
                                 <div>
-                                     <input type="password" placeholder='Confirm Password' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                     <input type="password" value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}} placeholder='Confirm Password' className='border-2 p-3 border-secondary w-sm rounded-md'/>
+                                     {showPasswordMatchError&&(<p className='text-sm text-red-600'>Passwords do not match</p>)}    
                                 </div>
                                 
                                 
                                
                             </div>
-                            <button className='bg-primary text-background p-3 px-8 hover:bg-purple-500 rounded-md'>Sign in</button>
+                            <button onClick={submit} className='bg-primary text-background p-3 px-8 hover:bg-purple-500 rounded-md'>Sign in</button>
                         </div>
                     </div>
 
