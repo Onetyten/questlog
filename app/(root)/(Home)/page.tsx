@@ -23,7 +23,7 @@ const handlechangeBar = () => {
       <PersistGate persistor={persistor}>
           <div className="text-xl w-full h-screen flex absolute justify-around font-roboto bg-secondary ">
             <div className="bg-secondary flex justify-around flex-1">
-                <Sidebar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} handlechangeBar={handlechangeBar}/>
+                <Sidebar openSideBar={openSideBar} handlechangeBar={handlechangeBar}/>
                 <div className="flex-3 flex flex-col w-full bg-background overflow-scroll">
                   <div className="border-b-2 border-secondary min-h-20 flex items-center">
                     <p className="ml-6 text-3xl text-primary ">
