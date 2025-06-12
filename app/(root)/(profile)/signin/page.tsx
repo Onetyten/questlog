@@ -64,7 +64,7 @@ export default function page() {
         }
 
         if (email && email.trim().length>0 && password && password.trim().length>7 && confirmPassword && confirmPassword === password)
-        {
+        {   
             const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signin`, { email, password});
 
             if (!res.data.success) {
@@ -148,7 +148,7 @@ export default function page() {
             </div>
 
             <div className='h-full relative overflow-hidden bg-amber-100 flex-1 flex flex-col justify-center items-center'>
-                <Image alt='signup screen' src={'/splash_art/login.webp'} fill style={{ objectFit: 'cover' }}/>
+                <Image alt='signup screen' src={'/splash_art/login.webp'} priority sizes='80vw' fill style={{ objectFit: 'cover' }}/>
             </div>
 
             <div className='absolute flex items-center text-2xl top-0 left-0 text-primary font-semibold'>

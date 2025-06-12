@@ -47,13 +47,6 @@ const userSlice =createSlice({
             state._id = ""
             state.name = ""
             state.email = ""
-            state.refreshToken = {
-                _id:"",
-                createdAt:"",
-                device:"",
-                expiresAt:"",
-                token:""
-            }
             state.accessToken = ""
         },
 
