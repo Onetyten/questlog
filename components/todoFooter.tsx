@@ -8,12 +8,12 @@ export default function TodoFooter() {
           setShowInput(!showInput)
      }
   return (
-       <div className='flex my-6 flex-col items-start gap-6'>
+       <div className='flex my-6 mb-32 flex-col items-start gap-6'>
             <div className='p-2 hover:bg-purple-600 bg-primary text-background rounded-lg flex items-center gap-2' onClick={()=>{HandleShowTodo()}}>
                 {!showInput?<IoMdAdd/>:<IoMdRemove/>}
                 New Task
             </div>
-            {showInput&&<InputTodo/>}
+            {showInput&&<InputTodo parent_id={null} />}
             
        </div>
   )

@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import { MdKeyboardDoubleArrowLeft,MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { GrHomeRounded } from "react-icons/gr";
 import { CiCalendar } from "react-icons/ci";
 import { GiUpgrade,GiRank1  } from "react-icons/gi";
@@ -19,7 +18,7 @@ interface sidebarProps {
 
 
 export default function Sidebar(props:sidebarProps) {
-    const {openSideBar,handlechangeBar} = props
+    const {openSideBar} = props
     const router = useRouter()
 
     const userRedux  = useSelector((state:RootState)=>state.user)
@@ -30,26 +29,27 @@ export default function Sidebar(props:sidebarProps) {
     }
     console.log(userRedux)
   return (
-    <div className={`bg-background border-r-2 flex  flex-col box-content justify-between border-secondary h-screen ${openSideBar?'w-80':'w-20'}  top-0 left-0`}>
+    <div className={`bg-background border-r-2 flex  flex-col box-content justify-between border-secondary h-screen ${openSideBar?'':'w-20'}  top-0 left-0`}>
         <div className='w-full'>
             <div className='flex justify-between items-center relative border-b-2 h-20 px-6'> 
                 <div className={`flex gap-4 items-center w-full ${openSideBar?'justify-start':'justify-center'} `}>
-                    <Avatar className='size-12'>
+                    <Avatar className='2xl:size-12 size-10'>
                         <AvatarImage/>
                         <AvatarFallback>{userRedux.name.slice(0,2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     {openSideBar&&(
-                        <p className='text-lg'>
-                            {userRedux.name}
+                        <p className='2xl:text-lg'>
+                            {userRedux.name.slice(0,20)}
+                            {userRedux.name.length>20?"....":""}
                         </p>  
                     )}
                           
                 </div>
-                {openSideBar?(<MdKeyboardDoubleArrowLeft className='text-3xl text-gray-500' onClick={handlechangeBar} />):(<MdKeyboardDoubleArrowRight className={`text-3xl text-gray-500 absolute -right-3 -bottom-4 bg-background shadow-sm rounded-full`} onClick={handlechangeBar} />)}
+               
                 
             </div>
 
-            <div className='flex flex-col w-full p-6 px-0 text-center gap-8 justify-center items-center '>
+            <div className='flex flex-col w-full p-6 px-0 text-center 2xl:gap-8 gap-4 justify-center items-center '>
                 <SidebarItem name = "Todo" icon = {<GrHomeRounded  />} active={true} openSideBar = {openSideBar}/>
                 <SidebarItem name = "My Day" icon = {<CiCalendar />} active={false} openSideBar = {openSideBar}/>
                 <SidebarItem name = "Upgrades" icon = {<GiUpgrade />} active={false} openSideBar = {openSideBar} />

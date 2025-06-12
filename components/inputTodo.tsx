@@ -2,12 +2,17 @@
 import api from '@/lib/api'
 import { RootState } from '@/store'
 import { addTodo, deleteTodo, replaceTodo } from '@/store/todoSlice/todoSlice'
-import { setPriority } from 'os'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 
-export default function InputTodo() {
+
+interface InputType{
+    parent_id:string|null,
+}
+
+export default function InputTodo(prop:InputType) {
+    const {parent_id} = prop
     const dispatch = useDispatch()
     const userData = useSelector((state:RootState)=>state.user)
     // const taskRedux = useSelector((state:RootState)=>state.todo)
@@ -27,8 +32,8 @@ export default function InputTodo() {
     const defaultStatusOption = statusOptions.find(option=>option.value == 'pending')
     const [showTaskError,setShowTaskError] = useState(false) 
 
-    const [selectedStatus,setSelectedStatus] = useState(defaultStatusOption)
-    const [selectedPriority,setSelectedPriority] = useState(defaultPriority)
+    const [selectedStatus,setSelectedStatus] = useState(defaultStatusOption||null)
+    const [selectedPriority,setSelectedPriority] = useState(defaultPriority||null)
 
 
     async function submitTask () {
@@ -37,7 +42,7 @@ export default function InputTodo() {
             setShowTaskError(false)
             const newTodo={
                 user_id: userData._id,
-                parent_id: null,
+                parent_id: parent_id,
                 title: title,
                 status:selectedStatus?.value ?? null,
                 priority:selectedPriority?.value ?? null,
@@ -49,7 +54,7 @@ export default function InputTodo() {
             const TempId = action.payload._id
             try {
                 
-                const res = await api.post('/api/task/add', {title,status:selectedStatus?.value,priority:selectedPriority?.value,dueDate:dueDate.toISOString()})
+                const res = await api.post('/api/task/add', {title,status:selectedStatus?.value,priority:selectedPriority?.value,dueDate:dueDate.toISOString(),parent_id: parent_id})
                 if (res.data.success == false){
                     dispatch(deleteTodo(action.payload))
                     return alert ("Add task operation failed")
@@ -75,21 +80,21 @@ export default function InputTodo() {
     }
 
   return (
-        <div className='w-3xl border-2 mb-9 border-secondary rounded-lg flex pl-12 p-6'>
+        <div className=' border-2 mb-9 border-secondary rounded-lg flex 2xl:pl-12 pl-4 2xl:p-6 p-2'>
 
-            <div className='flex flex-col gap-3 items-start'>
+            <div className='flex flex-col gap-1 items-start'>
 
-                <div className='flex gap-2 flex-col'>
-                    <input type="text" placeholder='Add new task' className='border-2 border-secondary p-3 w-lg rounded-lg' onChange={(e)=>{setTitle(e.target.value)}} />
+                <div className='flex gap-1 flex-col'>
+                    <input type="text" placeholder='Add new task' className='border-2 2xl:text-md text-xs border-secondary 2xl:p-3 p-2 w-xs 2xl:rounded-lg rounded-sm' onChange={(e)=>{setTitle(e.target.value)}} />
                     {showTaskError&& <p className='text-sm text-red-600'>Add your task description</p>}
                     
                 </div>
 
-                <div className='flex gap-6 items-center'>
-                    <div className='flex items-center gap-2'>
+                <div className='flex 2xl:gap-6 gap-2 items-center'>
+                    <div className='flex 2xl:text-md text-xs items-center gap-2'>
                         DueDate :
                         {/* <CiCalendar className='text-2xl' /> */}
-                        <input type="date" min={new Date().toISOString().split("T")[0]} name="" id="" className='size-6' onChange={(e)=>{
+                        <input type="date" min={new Date().toISOString().split("T")[0]} name="" id="" className='size-5' onChange={(e)=>{
                             const todaysDate = new Date()
                             const changedDate = new Date(e.target.value)
 
@@ -104,12 +109,15 @@ export default function InputTodo() {
                             }
                             
                         }}/>
+                        <p className='2xl:text-md text-xs'>
+                           {dueDate.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})} 
+                        </p>
 
-                        {dueDate.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}
+                        
 
                     </div>
 
-                    <div className=' p-2 px-6 rounded-lg'>
+                    <div className=' p-2 px-6 2xl:text-md text-xs rounded-lg'>
                         <div className='flex items-center gap-2 relative'>
                             <p>
                                 Completion status :
@@ -122,14 +130,14 @@ export default function InputTodo() {
                     
                 </div>
 
-                <div className='rounded-md flex items-center gap-3'>
+                <div className='rounded-md flex 2xl:text-md text-xs items-center gap-3'>
                     <p>
                         Priority :
                     </p>
                     <Select options={priorityOptions} defaultValue={selectedPriority} onChange={setSelectedPriority }/>
                 </div>
 
-                <div>
+                <div className='2xl:text-md text-xs'>
                     <div onClick={()=>{submitTask()}} className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-lg flex items-center gap-2'>
                         Add Task 
                     </div>
@@ -140,11 +148,3 @@ export default function InputTodo() {
   )
 }
 
-
-//     title: {
-
-//     status:{
-
-//     priority:{
-
-//     dueDate:{

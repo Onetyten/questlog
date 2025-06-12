@@ -7,7 +7,7 @@ import {store,persistor} from "@/store"
 import { PersistGate } from "redux-persist/integration/react"
 import TodoBody from "@/components/todoBody"
 import { useState } from "react"
-
+import { BsLayoutSidebarInset,BsLayoutSidebarInsetReverse } from "react-icons/bs";
 
 export default function Home() {
 
@@ -25,7 +25,8 @@ const handlechangeBar = () => {
             <div className="bg-secondary flex justify-around flex-1">
                 <Sidebar openSideBar={openSideBar} handlechangeBar={handlechangeBar}/>
                 <div className="flex-3 flex flex-col w-full bg-background overflow-scroll">
-                  <div className="border-b-2 border-secondary min-h-20 flex items-center">
+                  <div className="border-b-2 border-secondary min-h-20 flex pl-5 items-center">
+                    {openSideBar?(<BsLayoutSidebarInset className="text-2xl text-gray-500" onClick={handlechangeBar}/>):(<BsLayoutSidebarInsetReverse className="text-2xl text-gray-500" onClick={handlechangeBar}/>)}
                     <p className="ml-6 text-3xl text-primary ">
                       To-Do
                     </p>

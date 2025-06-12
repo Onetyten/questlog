@@ -57,9 +57,9 @@ export default function Quotebar() {
 
  
   return (
-    <div className='w-[80%] min-h-32 gap-2 p-3 py-12 bg-background text-base flex justify-center items-center flex-col text-center'>
+    <div className='w-[80%] min-h-32 gap-2 2xl:p-3 p-2 2xl:py-12 py-3 bg-background 2xl:text-base text-sm flex justify-center items-center flex-col text-center'>
         <div className='flex flex-col gap-2'>
-            <FaQuoteLeft className='text-2xl'/>
+            <FaQuoteLeft className='2xl:text-2xl text-lg'/>
             <p>
                 {
                     Array.isArray(quoteRedux) && quoteRedux[quoteIndex]
@@ -69,7 +69,7 @@ export default function Quotebar() {
 
         </div>
         <div className='flex justify-self-end w-full justify-end p-3'>
-            <p className='text-lg font-semibold'>
+            <p className='2xl:text-lg text-sm font-semibold'>
                 {
                     Array.isArray(quoteRedux) && quoteRedux[quoteIndex]
                     ? `${quoteRedux[quoteIndex].a}` : " -- Albert Einstein"
