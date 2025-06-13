@@ -13,7 +13,7 @@ import { LuChevronsUpDown } from "react-icons/lu";
 
 
 interface TaskPropType {
-    title:string | null,
+    title:string,
     dueDate:string | null,
     priority:string | null,
     status:string | null,

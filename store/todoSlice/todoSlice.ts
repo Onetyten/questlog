@@ -5,7 +5,7 @@ interface todolistTypes{
     _id: string;
     user_id: string|null,
     parent_id: string|null,
-    title: string|null,
+    title: string
     status:string|null,
     priority:string|null,
     dueDate:string|null,
