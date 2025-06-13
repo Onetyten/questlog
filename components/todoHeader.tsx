@@ -20,7 +20,7 @@ const sortOptions = [
   { value: 'priority', label: 'Priority' },
   { value: 'status', label: 'Status' },
   { value: 'dueDate', label: 'Due Date' },
-  { value: 'dateCreated', label: 'Date Created' },
+  { value: 'dateCreated', label: 'D. Created' },
 ];
 
 const orderOptions = [
@@ -95,7 +95,7 @@ export default function TodoHeader() {
   }, [selectedSortOption, selectedOrder, selectedPriority, selectedStatus, selectedDateFilter]);
 
   return (
-    <div className='flex gap-2 items-center justify-between flex-wrap text-xs 2xl:text-md'>
+    <div className='flex gap-2 items-center justify-between text-xs 2xl:text-md'>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
         <div className='flex gap-1 items-center'>
@@ -107,8 +107,8 @@ export default function TodoHeader() {
           </span>
         </div>
         
-        <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className='2xl:w-36 w-24' />
-        <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className='2xl:w-36 w-24' />
+        <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24' />
+        <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24' />
       </div>
 
       <div className='flex items-center gap-2 rounded-lg p-2'>
@@ -119,9 +119,9 @@ export default function TodoHeader() {
           </span>
         </div>
         <div className='flex items-center gap-2'>
-          <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='2xl:w-36 w-24' />
-          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='2xl:w-32 hidden 2xl:inline w-24' />
-          <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='2xl:w-32 w-20' />
+          <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24' />
+          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24'/>
+          <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='w-24' />
         </div>
       </div>
     </div>
