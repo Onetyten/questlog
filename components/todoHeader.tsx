@@ -120,7 +120,7 @@ export default function TodoHeader() {
         </div>
         <div className='flex items-center gap-2'>
           <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='2xl:w-36 w-24' />
-          {/* <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='2xl:w-32 hidden 2xl:inline w-24' /> */}
+          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='2xl:w-32 hidden 2xl:inline w-24' />
           <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='2xl:w-32 w-20' />
         </div>
       </div>
