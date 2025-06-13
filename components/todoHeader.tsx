@@ -98,22 +98,29 @@ export default function TodoHeader() {
     <div className='flex gap-2 items-center justify-between flex-wrap text-xs 2xl:text-md'>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
-        {selectedOrder?.value === "desc" ? <TbSortDescending className='2xl:text-xl text-xl' /> : <TbSortAscending className='2xl:text-xl text-lg'  />}
+        <div className='flex gap-1 items-center'>
+          {selectedOrder?.value === "desc" ? <TbSortDescending className='2xl:text-xl text-xl' /> : <TbSortAscending className='2xl:text-xl text-lg'  />}
 
 
-
-        Sort by:
+          <span className='text-base 2xl:text-base'>
+            Sort by :
+          </span>
+        </div>
+        
         <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className='2xl:w-36 w-24' />
         <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className='2xl:w-36 w-24' />
       </div>
 
       <div className='flex items-center gap-2 rounded-lg p-2'>
-        <CiFilter className='text-xl'  />
-        Filter : 
-        
+        <div className='flex gap-1 items-center'>
+          <CiFilter className='text-xl'  />
+          <span className='text-base 2xl:text-base'>
+            Filter :
+          </span>
+        </div>
         <div className='flex items-center gap-2'>
           <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='2xl:w-36 w-24' />
-          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='2xl:w-32 w-24' />
+          {/* <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='2xl:w-32 hidden 2xl:inline w-24' /> */}
           <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='2xl:w-32 w-20' />
         </div>
       </div>

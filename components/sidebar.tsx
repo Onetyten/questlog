@@ -29,7 +29,7 @@ export default function Sidebar(props:sidebarProps) {
     }
     console.log(userRedux)
   return (
-    <div className={`bg-background border-r-2 flex  flex-col box-content justify-between border-secondary h-screen ${openSideBar?'':'w-20'}  top-0 left-0`}>
+    <div className={`bg-background border-r-2 flex  flex-col box-content justify-between border-secondary h-screen ${openSideBar?'w-60':'w-20'}  top-0 left-0`}>
         <div className='w-full'>
             <div className='flex justify-between items-center relative border-b-2 h-20 px-6'> 
                 <div className={`flex gap-4 items-center w-full ${openSideBar?'justify-start':'justify-center'} `}>
