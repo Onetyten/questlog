@@ -60,7 +60,6 @@ export default function TodoHeader() {
   const [selectedDateFilter, setSelectedDateFilter] = useState<OptionType | null>(null);
 
 
-  // Build query string
   function buildQuery() {
     const query = new URLSearchParams();
 

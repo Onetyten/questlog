@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GrHomeRounded } from "react-icons/gr";
 import { CiCalendar } from "react-icons/ci";
 import { GiUpgrade,GiRank1  } from "react-icons/gi";
@@ -22,11 +22,15 @@ export default function Sidebar(props:sidebarProps) {
     const router = useRouter()
 
     const userRedux  = useSelector((state:RootState)=>state.user)
-    if (!userRedux._id || !userRedux.name || !userRedux.email || !userRedux.refreshToken || !userRedux.accessToken)
-    {
-        router.push('/signin')
-        return
-    }
+
+    useEffect(()=>{
+        if (!userRedux._id || !userRedux.name || !userRedux.email || !userRedux.refreshToken || !userRedux.accessToken)
+        {
+            router.push('/signin')
+            return
+        }
+    },[router,userRedux])
+
     console.log(userRedux)
   return (
     <div className={`bg-background border-r-2 flex  flex-col box-content justify-between border-secondary h-screen ${openSideBar?'w-60':'w-20'}  top-0 left-0`}>

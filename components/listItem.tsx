@@ -132,8 +132,8 @@ export default function ListItem(prop:TaskPropType) {
                     <div className='flex w-full'>
                        {!editTextShow?
                        ( <div>
-                            <p className={`${isChecked?"line-through":""} mb-4 hidden 2xl:block` }> {title} </p>
-                            <p className={`${isChecked?"line-through":""} mb-4 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-8 hidden 2xl:block` }> {title} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-8 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
                         </div>
                        
                        ):
