@@ -100,19 +100,17 @@ export default function ListItem(prop:TaskPropType) {
 
   return (
     showTask &&(
-        <div className={`w-full flex-grow ${parent_id?"border-y-2 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary  relative flex gap-6  p-3`}>
-            <div className='flex 2xl:gap-6 xl:gap-2 gap-1 w-full'>
-                <div>
+        <div className={`w-full flex-grow ${parent_id?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
+            <div className='flex flex-row justify-between w-full'>
+                <div >
                     <input
                         type="checkbox"
                         checked={isChecked}
                         className="2xl:size-6 size-4"
                         onChange={async (e) => {
-
                             const checked = e.target.checked;
                             setIsChecked(checked);
 
-                            // Immediately update the status
                             const newStatus = checked ? "completed" : "ongoing";
                             try {
                             const res = await api.patch(`/api/task/edit/${_id}`, { status: newStatus });
@@ -128,12 +126,48 @@ export default function ListItem(prop:TaskPropType) {
 
                 </div>
 
+               
+                <div className={`flex gap-3 pr-3 `}>
+                    <div className='text-xl relative'>
+                
+                        <BsThreeDots onClick={()=>{setShowDetailBox(!showDetailBox)}}/>
+                    
+                        {showDetailBox&&(
+                        <OutsideClickHandler  onOutsideClick={() => { setShowDetailBox(false)}} >
+                            <div className='text-base absolute top-8 z-20 text-center bg-secondary -left-10 shadow-md flex flex-col rounded-sm '>
+                                {!isChecked&&(
+                                    <p className='hover:bg-primary p-2 px-6 w-full rounded-t-sm' onClick={()=>{setEditTextShow(!editTextShow)}}>
+                                        Edit
+                                    </p>   
+                                )}
+                                {!isChecked&& childrenTodo.length>0&&(
+                                    <p className='hover:bg-primary p-2 px-6 w-full'>
+                                        Open
+                                    </p>   
+                                )}
+                                <p className={`hover:bg-red-600 ${isChecked?"rounded-xl":"rounded-b-xl"} p-2 px-6 w-full rounded-b-sm`} onClick={()=>{deleteTask()}}>
+                                    Delete
+                                </p>
+                            </div>
+                        </OutsideClickHandler>
+                        )}
+                    </div>
+
+                    <div className='flex gap-3 text-xl right-3'>
+                        <LuChevronsUpDown onClick={()=>{setShowAll(!showAll)}} />
+                    </div>
+                </div>
+            </div>
+           
+            <div className='flex 2xl:gap-6 xl:gap-2 gap-1 w-full'>
+                
+                
                 <div className='flex 2xl:text-md text-sm w-full flex-col 2xl:gap-3 gap-1 items-start'>
                     <div className='flex w-full'>
                        {!editTextShow?
                        ( <div>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-8 hidden 2xl:block` }> {title} </p>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-8 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 hidden 2xl:block` }> {title} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
                         </div>
                        
                        ):
@@ -275,29 +309,7 @@ export default function ListItem(prop:TaskPropType) {
 
                 </div>
             </div>
-            <div className='flex gap-3 text-xl absolute right-3'>
-                <LuChevronsUpDown onClick={()=>{setShowAll(!showAll)}} />
 
-                <div className='text-xl relative'>
-                    
-                    <BsThreeDots onClick={()=>{setShowDetailBox(true)}}/>
-                
-                    {showDetailBox&&(
-                    <OutsideClickHandler  onOutsideClick={() => { setShowDetailBox(false)}} >
-                        <div className='text-base absolute top-8 text-center bg-secondary -left-10 shadow-md flex flex-col rounded-xl '>
-                            {!isChecked&&(
-                                <p className='hover:bg-primary p-2 px-8 w-full rounded-t-xl' onClick={()=>{setEditTextShow(true)}}>
-                                    Edit
-                                </p>    
-                            )}
-                            <p className={`hover:bg-red-600 ${isChecked?"rounded-xl":"rounded-b-xl"} p-2 px-8 w-full rounded-b-xl`} onClick={()=>{deleteTask()}}>
-                                Delete
-                            </p>
-                        </div>
-                    </OutsideClickHandler>
-    )}
-                </div>
-            </div>
 
             
         </div>

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { CiFilter } from "react-icons/ci";
 import { useDispatch } from 'react-redux';
 import { setTodos } from '@/store/todoSlice/todoSlice';
+import { FaCaretRight } from "react-icons/fa6";
+import { FaCaretLeft} from "react-icons/fa6";
 import Select from 'react-select';
 import api from '@/lib/api';
 import { TbSortAscending,TbSortDescending } from "react-icons/tb";
@@ -60,6 +62,11 @@ export default function TodoHeader() {
   const [selectedDateFilter, setSelectedDateFilter] = useState<OptionType | null>(null);
 
 
+  const [showSortOPtions, setShowSortOptions] = useState(false)
+  const [showFilterOptions, setShowFilterOptions] = useState(false)
+
+
+
   function buildQuery() {
     const query = new URLSearchParams();
 
@@ -94,33 +101,51 @@ export default function TodoHeader() {
   }, [selectedSortOption, selectedOrder, selectedPriority, selectedStatus, selectedDateFilter]);
 
   return (
-    <div className='flex gap-2 items-center justify-between text-xs 2xl:text-md'>
+    <div className='flex gap-2 items-center justify-between text-xs flex-wrap  2xl:text-md'>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
-        <div className='flex gap-1 items-center'>
-          {selectedOrder?.value === "desc" ? <TbSortDescending className='2xl:text-xl text-xl' /> : <TbSortAscending className='2xl:text-xl text-lg'  />}
+        <div className='flex gap-1 items-center text-sm 2xl:text-base'>
+          {selectedOrder?.value === "desc" ? <TbSortDescending className='2xl:text-xl text-xl' /> : <TbSortAscending className='2xl:text-xl text-xl'  />}
 
 
-          <span className='text-base 2xl:text-base'>
-            Sort by :
+          <span className='text-sm 2xl:text-base flex items-center gap-1'>
+            Sort by <span className='hidden 2xl:inline'>:</span>
+
+            <span onClick={()=>{
+              setShowSortOptions(true)
+              setShowFilterOptions(false)
+            }} className={`${!showSortOPtions?'flex xl:hidden':'hidden'} text-xl`} ><FaCaretRight /></span>
           </span>
         </div>
+
+        <div className={`flex ${showSortOPtions?'flex':'hidden xl:flex'} items-center gap-2`}>
+            <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24' />
+            <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24' />
+             <span onClick={()=>{ setShowSortOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
+        </div>
         
-        <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24' />
-        <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24' />
+
       </div>
 
       <div className='flex items-center gap-2 rounded-lg p-2'>
         <div className='flex gap-1 items-center'>
-          <CiFilter className='text-xl'  />
-          <span className='text-base 2xl:text-base'>
-            Filter :
+          <CiFilter className='2xl:text-xl text-xl'  />
+          <span className='text-sm 2xl:text-base flex items-center gap-1'>
+            Filter <span className='hidden 2xl:inline'>:</span>
+             <span onClick={()=>{
+              setShowFilterOptions(true)
+              setShowSortOptions(false)
+
+             }} className={`${!showFilterOptions?'flex xl:hidden':'hidden'} text-xl`} ><FaCaretRight /></span>
           </span>
         </div>
-        <div className='flex items-center gap-2'>
+
+
+        <div className={`flex ${showFilterOptions?'flex':'hidden xl:flex'} items-center gap-2`}>
           <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24' />
           <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24'/>
           <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='w-24' />
+          <span onClick={()=>{ setShowFilterOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
         </div>
       </div>
     </div>
