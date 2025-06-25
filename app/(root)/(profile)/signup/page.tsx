@@ -84,7 +84,7 @@ export default function page() {
     }
 
   return (
-    <div className='bg-secondary h-screen w-full flex justify-center items-center '>
+    <div className='bg-secondary dark:bg-foreground h-screen w-full flex justify-center items-center '>
         <div className='flex bg-background relative w-[90%] h-[90%] sm:w-9/12 sm:h-10/12 shadow-lg'>
             <div className='h-full flex-1 relative flex justify-center items-center'>
                 <div className='w-10/12 h-11/12 flex flex-col justify-around'>

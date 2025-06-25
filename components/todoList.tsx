@@ -43,7 +43,7 @@ export default function TodoList() {
     fetchTasks()
   },[])
   return (
-    <div className='mt-6 flex flex-col gap-6'>
+    <div className='sm:mt-6 flex flex-col gap-6'>
       {unCompletedTodos.map((item)=>{
         return(
           <ListItem key={item._id} title= {item.title} dueDate = {item.dueDate} priority = {item.priority} status={item.status} _id = {item._id} parent_id={item.parent_id} level = {0} />

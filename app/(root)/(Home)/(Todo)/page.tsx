@@ -24,10 +24,10 @@ const handlechangeBar = () => {
 
           
             <div className="flex 2xl:flex-3 xl:flex-2 flex-col">
-              <div className="border-b-2 border-secondary min-h-20 flex pl-5 items-center">
+              <div className="border-b-2 border-secondary min-h-16 sm:min-h-20 flex pl-5 items-center">
               {openBarRedux?(<BsLayoutSidebarInset className="text-2xl hidden xl:flex text-gray-500" onClick={handlechangeBar}/>):(<BsLayoutSidebarInsetReverse className="text-2xl text-gray-500 hidden xl:flex" onClick={handlechangeBar}/>)}
                 <div className="flex w-full items-center justify-between mr-10">
-                  <p className="ml-6 text-3xl text-primary ">
+                  <p className="ml-6 text-2xl sm:text-3xl text-primary ">
                     To-Do
                   </p>
                   

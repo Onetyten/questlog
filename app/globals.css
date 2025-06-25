@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 /* @tailwind base;
 @tailwind components; */
 @tailwind utilities;
 @import "tw-animate-css";
-@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --foreground:#ffffff;
@@ -85,10 +85,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-  --background:#ffffff;
-  --foreground:#181318;
+  --background:#181318;
+  --foreground:#ffffff;
   --primary: #ba8fff;
-  --secondary:#dddbe0;
+  --secondary:#545157;
 
   }
 }

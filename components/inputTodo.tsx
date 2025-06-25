@@ -122,7 +122,7 @@ export default function InputTodo(prop:InputType) {
                             <p>
                                 Completion status :
                             </p>
-                            <Select options={statusOptions} defaultValue={selectedStatus} onChange={setSelectedStatus }/>
+                            <Select className='text-background' options={statusOptions} defaultValue={selectedStatus} onChange={setSelectedStatus }/>
                         </div>
                     </div>
 
@@ -134,7 +134,7 @@ export default function InputTodo(prop:InputType) {
                     <p>
                         Priority :
                     </p>
-                    <Select options={priorityOptions} defaultValue={selectedPriority} onChange={setSelectedPriority }/>
+                    <Select className='text-background' options={priorityOptions} defaultValue={selectedPriority} onChange={setSelectedPriority }/>
                 </div>
 
                 <div className='2xl:text-md text-xs'>

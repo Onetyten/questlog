@@ -115,7 +115,7 @@ export default function ListItem(prop:TaskPropType) {
                     <input
                         type="checkbox"
                         checked={isChecked}
-                        className="2xl:size-6 size-4"
+                        className="2xl:size-6 size-4 bg-foreground checked:bg-foreground"
                         onChange={async (e) => {
                             const checked = e.target.checked;
                             setIsChecked(checked);
@@ -224,7 +224,7 @@ export default function ListItem(prop:TaskPropType) {
 
                             <div className='rounded-lg'>
                                 <div className='flex items-center gap-2 2xl:text-md text-xs relative'>
-                                <Select options={statusOptions} defaultValue={selectedStatus} onChange={async (option)=>{
+                                <Select options={statusOptions} className='text-background' defaultValue={selectedStatus} onChange={async (option)=>{
                                     setSelectedStatus(option)
                                     console.log(option?.value)
                                     try {
@@ -246,7 +246,7 @@ export default function ListItem(prop:TaskPropType) {
                     )}
                     {showAll && !isChecked&&(
                     <div className='2xl:text-md text-xs'>
-                        <Select options={priorityOptions} defaultValue={selectedPriority} onChange={async(option)=>{
+                        <Select className='text-background' options={priorityOptions} defaultValue={selectedPriority} onChange={async(option)=>{
                             setSelectedPriority(option)
                             console.log("selected priority",option)
                             try {
