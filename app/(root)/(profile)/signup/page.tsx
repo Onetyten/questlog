@@ -51,17 +51,31 @@ export default function page() {
         }
 
         if (name && name.trim().length>0 && email && email.trim().length>0 && password && password.trim().length>7 ){
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signup`, { name, email, password});
-
-            if (!res.data.success) {
-                console.log("Signup failed:", res.data?.message || "Unknown error");
-                return alert(res.data?.message || "Something went wrong");
-            } 
-            if (res.data.user.name && res.data.user.email && res.data.user._id)
+            try
             {
-                console.log(res.data.user)
-                router.push('/signin')
-            }    
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signup`, { name, email, password});
+
+                if (!res.data.success) {
+                    console.log("Signup failed:", res.data?.message || "Unknown error");
+                    return alert(res.data?.message || "Something went wrong");
+                } 
+                if (res.data.user.name && res.data.user.email && res.data.user._id)
+                {
+                    alert(`Signup successful welcome ${res.data.user.name}`)
+                    console.log(res.data.user)
+                    router.push('/signin')
+                } 
+            }
+            catch(error)
+            {
+                if (axios.isAxiosError(error)){
+                    alert(error.response?.data?.message || "Server error. Please try again.");
+                }
+                else
+                {
+                    alert("Something went wrong. Please try again.");
+                }
+            }   
         }
      
         

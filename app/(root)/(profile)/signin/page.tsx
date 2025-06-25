@@ -65,31 +65,38 @@ export default function page() {
 
         if (email && email.trim().length>0 && password && password.trim().length>7 && confirmPassword && confirmPassword === password)
         {   
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signin`, { email, password});
+           try {
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/auth/signin`, { email, password});
 
-            if (!res.data.success) {
-                console.log("Signin failed:", res.data?.message || "Unknown error");
-                return alert(res.data?.message || "Something went wrong");
-            }
-
-            if (res.data.user.id && res.data.user.name && res.data.user.email && res.data.token && res.data.refreshToken?.token)
-            {
-                const savedData:userInterface = {
-                    _id:res.data.user.id,
-                        name:res.data.user.name,
-                        email:res.data.user.email,
-                        refreshToken:res.data.refreshToken,
-                        accessToken:res.data.token
+                if (!res.data.success) {
+                    alert(res.data?.message || "Something went wrong");
+                    return 
                 }
 
-                dispatch(setUser(savedData))
-                console.log(savedData)
-                router.push('/')
-            }
-            else
-            {
-                return alert("Something went wrong, retry")
-            }
+                if (res.data.user.id && res.data.user.name && res.data.user.email && res.data.token && res.data.refreshToken?.token)
+                {
+                    alert(`Login successful welcome ${res.data.user.name}`)
+                    const savedData:userInterface = {
+                        _id:res.data.user.id,
+                            name:res.data.user.name,
+                            email:res.data.user.email,
+                            refreshToken:res.data.refreshToken,
+                            accessToken:res.data.token
+                    }
+
+                    dispatch(setUser(savedData))
+                    console.log(savedData)
+                    router.push('/')
+                }
+           } catch (error) {
+            
+                if (axios.isAxiosError(error)) {
+                    alert(error.response?.data?.message || "Server error. Please try again.");
+                } 
+                else {
+                    alert("Something went wrong. Please try again.");
+                }
+           }    
 
 
             
