@@ -18,19 +18,25 @@ export default function ChildTaskModal() {
   return (
     <div>
         {showChildModal && (
-            <div className="fixed  z-60 top-0 left-0 w-full h-screen flex justify-center items-center">
+            <div className="fixed  z-60 -top-1 left-0 w-full h-screen flex justify-center items-center flex-col gap-6 no-scrollbar ">
                 <div className='w-full bg-background relative h-full flex flex-col justify-center items-center overflow-scroll'>
                     
                     <IoIosClose onClick={()=>{dispatch(closeModal())}} className='absolute top-0 left-0 text-5xl hover:text-primary cursor-pointer' />
-                    <p className='text-xl'>Subtasks of  <span className='text-primary'>{parentTodo?.title}</span></p> 
-                    <div className=' flex flex-col justify-start gap-6 w-[80%] h-[90%] overflow-scroll p-16'>
+                    <p className='text-xl text-primary'> {parentTodo?.title}</p> 
+                    <div className=' flex flex-col justify-start gap-6 w-[90%] xl:w-[60%] 2xl:w-[40%] h-[90%] overflow-scroll py-16 pb-32 sm:p-16'>
                         {unCompletedTodos.map((item)=>{
                         return(
-                            <ModalListItem key={item._id} title= {item.title} dueDate = {item.dueDate} priority = {item.priority} status={item.status} _id = {item._id} parent_id={item.parent_id} level = {0} />
+                            <div key={item._id}>
+                                <ModalListItem key={item._id} title= {item.title} dueDate = {item.dueDate} priority = {item.priority} status={item.status} _id = {item._id} parent_id={item.parent_id} level = {0} />
+                            </div>
+                            
                         )
                         })}    
                 
                     </div>
+                </div>
+                <div className='bg-background w-full h-8 absolute -bottom-3 z-50'>
+                    
                 </div>
 
             </div>

@@ -80,17 +80,17 @@ export default function InputTodo(prop:InputType) {
     }
 
   return (
-        <div className=' border-2 mb-9 border-secondary rounded-lg flex 2xl:pl-12 pl-4 2xl:p-6 p-2'>
+        <div className=' border-2 mb-9 border-secondary rounded-lg flex 2xl:pl-12 pl-4 2xl:p-6 p-2 w-full'>
 
-            <div className='flex flex-col gap-1 items-start'>
+            <div className='flex flex-col gap-4 sm:gap-1 items-start'>
 
                 <div className='flex gap-1 flex-col'>
-                    <input type="text" placeholder='Add new task' className='border-2 2xl:text-md text-xs border-secondary 2xl:p-3 p-2 w-xs 2xl:rounded-lg rounded-sm' onChange={(e)=>{setTitle(e.target.value)}} />
+                    <input type="text" placeholder='Add new task' className='border-2 2xl:text-md text-xs border-secondary 2xl:p-3 p-2 w-full 2xl:rounded-lg rounded-sm' onChange={(e)=>{setTitle(e.target.value)}} />
                     {showTaskError&& <p className='text-sm text-red-600'>Add your task description</p>}
                     
                 </div>
 
-                <div className='flex 2xl:gap-6 gap-2 items-center'>
+                <div className='flex flex-col sm:flex-row 2xl:gap-6 gap-6 sm:gap-2 items-start mt-3 sm:items-center'>
                     <div className='flex 2xl:text-md text-xs items-center gap-2'>
                         DueDate :
                         {/* <CiCalendar className='text-2xl' /> */}
@@ -117,7 +117,7 @@ export default function InputTodo(prop:InputType) {
 
                     </div>
 
-                    <div className=' p-2 px-6 2xl:text-md text-xs rounded-lg'>
+                    <div className=' sm:p-2 sm:px-6 2xl:text-md text-xs rounded-lg'>
                         <div className='flex items-center gap-2 relative'>
                             <p>
                                 Completion status :

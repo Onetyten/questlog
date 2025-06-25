@@ -109,7 +109,7 @@ export default function ListItem(prop:TaskPropType) {
 
   return (
     showTask &&(
-        <div className={`w-full flex-grow ${parent_id?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
+        <div className={` sm:w-full flex-grow ${parent_id?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
             <div className='flex flex-row justify-between w-full'>
                 <div >
                     <input
@@ -175,14 +175,13 @@ export default function ListItem(prop:TaskPropType) {
                     <div className='flex w-full'>
                        {!editTextShow?
                        ( <div>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 hidden 2xl:block` }> {title} </p>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 pr-3 text-wrap` }> {title} </p>
                         </div>
                        
                        ):
                        (
                          <div className={`flex  gap-3` }>
-                            <input type="text" placeholder='Add new task' value={editText} className='border-2 border-secondary p-3 w-lg rounded-lg' onChange={(e)=>{setEditText(e.target.value)}} />
+                            <input type="text" placeholder='Add new task' value={editText} className='border-2 border-secondary p-3 w-full sm:w-lg rounded-lg' onChange={(e)=>{setEditText(e.target.value)}} />
                             <button className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-lg flex items-center gap-2' onClick={async()=>{
                                 try {
                                     const res = await api.patch(`/api/task/edit/${_id}`, { title:editText});

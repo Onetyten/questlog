@@ -33,7 +33,7 @@ interface TaskPropType {
 
 
 export default function ModalListItem(prop:TaskPropType) {
-    const {title,priority,status,_id,dueDate,parent_id,level} = prop
+    const {title,priority,status,_id,dueDate,level} = prop
     const todoRedux = useSelector((state:RootState)=>state.todo)
     const dispatch = useDispatch()
     function formatDueDate(dueDate: string | null): string {
@@ -178,8 +178,7 @@ export default function ModalListItem(prop:TaskPropType) {
                     <div className='flex w-full'>
                        {!editTextShow?
                        ( <div>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 hidden 2xl:block` }> {title} </p>
-                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 2xl:hidden block` }> {title?.slice(0,120/level)} {title?.length>120/level?"...":""} </p>
+                            <p className={`${isChecked?"line-through":""} mb-4 mt-2 pr-3 text-wrap` }> {title} </p>
                         </div>
                        
                        ):
