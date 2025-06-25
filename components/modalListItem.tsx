@@ -227,7 +227,7 @@ export default function ModalListItem(prop:TaskPropType) {
 
                             <div className='rounded-lg'>
                                 <div className='flex items-center gap-2 2xl:text-md text-xs relative'>
-                                <Select options={statusOptions} className='text-background' defaultValue={selectedStatus} onChange={async (option)=>{
+                                <Select options={statusOptions} className='text-black' defaultValue={selectedStatus} onChange={async (option)=>{
                                     setSelectedStatus(option)
                                     console.log(option?.value)
                                     try {
@@ -249,7 +249,7 @@ export default function ModalListItem(prop:TaskPropType) {
                     )}
                     {showAll && !isChecked&&(
                     <div className='2xl:text-md text-xs'>
-                        <Select className='text-background' options={priorityOptions} defaultValue={selectedPriority} onChange={async(option)=>{
+                        <Select className='text-black' options={priorityOptions} defaultValue={selectedPriority} onChange={async(option)=>{
                             setSelectedPriority(option)
                             console.log("selected priority",option)
                             try {

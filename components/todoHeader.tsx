@@ -119,8 +119,8 @@ export default function TodoHeader() {
         </div>
 
         <div className={`flex ${showSortOPtions?'flex':'hidden xl:flex'} items-center gap-2`}>
-            <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24 text-background' />
-            <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24  text-background' />
+            <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24 text-black' />
+            <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24  text-black' />
              <span onClick={()=>{ setShowSortOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
         </div>
         
@@ -142,9 +142,9 @@ export default function TodoHeader() {
 
 
         <div className={`flex ${showFilterOptions?'flex':'hidden xl:flex'} items-center gap-2`}>
-          <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24  text-background' />
-          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24 hidden sm:inli  text-background'/>
-          <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='w-24  text-background' />
+          <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24  text-black' />
+          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24 hidden sm:inline  text-black'/>
+          <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='w-24  text-black' />
           <span onClick={()=>{ setShowFilterOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
         </div>
       </div>

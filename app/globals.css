@@ -7,8 +7,8 @@
 @import "tw-animate-css";
 
 :root {
-  --foreground:#ffffff;
-  --background:#181318;
+  --foreground:#181318;
+  --background:#ffffff;
   --primary: #ba8fff;
   --secondary:#dddbe0;
   --radius: 0.625rem;
