@@ -11,14 +11,9 @@ import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
 import { RootState } from '@/store';
 
-interface sidebarProps {
-    openSideBar:boolean,
-    handlechangeBar:()=>void
-}
 
-
-export default function Sidebar(props:sidebarProps) {
-    const {openSideBar} = props
+export default function Sidebar() {
+    const openBarRedux = useSelector((state:RootState)=>state.openBar.openBar)
     const router = useRouter()
 
     const userRedux  = useSelector((state:RootState)=>state.user)
@@ -33,15 +28,15 @@ export default function Sidebar(props:sidebarProps) {
 
     console.log(userRedux)
   return (
-    <div className={`bg-background border-r-2 xl:flex  flex-row xl:flex-col box-content hidden justify-between border-secondary h-screen ${openSideBar?'w-full xl:w-60':'xl:w-20 w-full'}  top-0 left-0`}>
+    <div className={`bg-background border-r-2 xl:flex  flex-row xl:flex-col box-content hidden justify-between border-secondary h-full ${openBarRedux?'w-full xl:w-44 2xl:w-60':'xl:w-20 w-full'}  top-0 left-0`}>
         <div className='w-full'>
             <div className='flex justify-between items-center relative border-b-2 h-20 px-6'> 
-                <div className={`flex gap-4 items-center w-full ${openSideBar?'justify-start':'justify-center'} `}>
+                <div className={`flex gap-4 items-center w-full ${openBarRedux?'justify-start':'justify-center'} `}>
                     <Avatar className='2xl:size-12 size-10'>
                         <AvatarImage/>
                         <AvatarFallback>{userRedux.name.slice(0,2).toUpperCase()}</AvatarFallback>
                     </Avatar>
-                    {openSideBar&&(
+                    {openBarRedux&&(
                         <p className='2xl:text-lg'>
                             {userRedux.name.slice(0,20)}
                             {userRedux.name.length>20?"....":""}
@@ -54,11 +49,11 @@ export default function Sidebar(props:sidebarProps) {
             </div>
 
             <div className='flex flex-row xl:flex-col  w-full p-6 px-0 text-center 2xl:gap-8 gap-4 justify-center items-center '>
-                <SidebarItem name = "Todo" icon = {<GrHomeRounded  />} active={true} openSideBar = {openSideBar}/>
-                <SidebarItem name = "My Day" icon = {<CiCalendar />} active={false} openSideBar = {openSideBar}/>
-                <SidebarItem name = "Upgrades" icon = {<GiUpgrade />} active={false} openSideBar = {openSideBar} />
-                <SidebarItem name = "Avatar" icon ={<RxAvatar />} active={false} openSideBar = {openSideBar} />
-                <SidebarItem name = "Rank" icon ={<GiRank1  />} active={false} openSideBar = {openSideBar} />
+                <SidebarItem name = "Todo" link="/" icon = {<GrHomeRounded  />} openSideBar = {openBarRedux}/>
+                <SidebarItem name = "My Day" link="/myday" icon = {<CiCalendar />} openSideBar = {openBarRedux}/>
+                <SidebarItem name = "Upgrades" link="/upgrades" icon = {<GiUpgrade />} openSideBar = {openBarRedux} />
+                <SidebarItem name = "Avatar" link="/avatar" icon ={<RxAvatar />} openSideBar = {openBarRedux} />
+                <SidebarItem name = "Rank" link="/rank" icon ={<GiRank1  />} openSideBar = {openBarRedux} />
             </div>
         </div>
 

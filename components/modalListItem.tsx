@@ -12,6 +12,9 @@ import InputTodo from './inputTodo';
 import { LuChevronsUpDown } from "react-icons/lu";
 import { openModal } from '@/store/showChildModalSlice/showChildModalSlice';
 import { setModalId } from '@/store/modalIdSlice/modalIdSlice';
+import ListItem from '@/components/listItem'
+
+
 
 
 interface TaskPropType {
@@ -29,7 +32,7 @@ interface TaskPropType {
 
 
 
-export default function ListItem(prop:TaskPropType) {
+export default function ModalListItem(prop:TaskPropType) {
     const {title,priority,status,_id,dueDate,parent_id,level} = prop
     const todoRedux = useSelector((state:RootState)=>state.todo)
     const dispatch = useDispatch()
@@ -109,7 +112,7 @@ export default function ListItem(prop:TaskPropType) {
 
   return (
     showTask &&(
-        <div className={`w-full flex-grow ${parent_id?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
+        <div className={`w-full flex-grow border-2 rounded-sm 2xl:rounded-lg border-secondary flex flex-col gap-2  py-3 pl-3`}>
             <div className='flex flex-row justify-between w-full'>
                 <div >
                     <input

@@ -14,12 +14,12 @@ export default function RouteHamburger(props:propType) {
     const {setShowMobileHamburger} = props
   return (
     <OutsideClickHandler  onOutsideClick={() => {setShowMobileHamburger(false) }}>
-        <div className='absolute right-14 top-14 bg-secondary py-5 text-sm flex flex-col z-20 rounded-md'>
-            <MobileSidebarItem name = "Todo" icon = {<GrHomeRounded  />} active={true} />
-            <MobileSidebarItem name = "My Day" icon = {<CiCalendar />} active={false} />
-            <MobileSidebarItem name = "Upgrades" icon = {<GiUpgrade />} active={false}  />
-            <MobileSidebarItem name = "Avatar" icon ={<RxAvatar />} active={false}  />
-            <MobileSidebarItem name = "Rank" icon ={<GiRank1  />} active={false}  />
+        <div className='absolute right-8 top-8 bg-secondary py-5 text-sm flex flex-col z-20 rounded-md'>
+            <MobileSidebarItem link="/"  name = "Todo" icon = {<GrHomeRounded  />}/>
+            <MobileSidebarItem link="myday"  name = "My Day" icon = {<CiCalendar />}/>
+            <MobileSidebarItem link="/upgrades"  name = "Upgrades" icon = {<GiUpgrade />}/>
+            <MobileSidebarItem link="/avatar"  name = "Avatar" icon ={<RxAvatar />} />
+            <MobileSidebarItem link="/rank"  name = "Rank" icon ={<GiRank1  />}/>
         </div>
     </OutsideClickHandler>
 
