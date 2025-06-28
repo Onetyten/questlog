@@ -56,7 +56,7 @@ export default function TodoHeader() {
   // State
 
   const [selectedSortOption, setSelectedSortOption] = useState<OptionType | null>(sortOptions.find(o => o.value === 'dateCreated')|| null);
-  const [selectedOrder, setSelectedOrder] = useState<OptionType | null>(orderOptions.find(o => o.value === 'desc') || null);
+  const [selectedOrder, setSelectedOrder] = useState<OptionType | null>(orderOptions.find(o => o.value === 'asc') || null);
   const [selectedPriority, setSelectedPriority] = useState<OptionType | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<OptionType | null>(null);
   const [selectedDateFilter, setSelectedDateFilter] = useState<OptionType | null>(null);
