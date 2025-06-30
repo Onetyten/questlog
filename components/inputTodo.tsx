@@ -138,7 +138,7 @@ export default function InputTodo(prop:InputType) {
                 </div>
 
                 <div className='2xl:text-md text-xs'>
-                    <div onClick={()=>{submitTask()}} className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-lg flex items-center gap-2'>
+                    <div onClick={()=>{submitTask()}} className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-sm text-xs flex items-center gap-2'>
                         Add Task 
                     </div>
                 </div>

@@ -101,14 +101,14 @@ export default function TodoHeader() {
   }, [selectedSortOption, selectedOrder, selectedPriority, selectedStatus, selectedDateFilter]);
 
   return (
-    <div className='flex gap-2 sm:items-center items-start justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap  2xl:text-md'>
+    <div className='flex gap-2 sm:items-center items-start justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap '>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
         <div className='flex gap-1 items-center text-sm 2xl:text-base'>
           {selectedOrder?.value === "desc" ? <TbSortDescending className='2xl:text-xl text-xl' /> : <TbSortAscending className='2xl:text-xl text-xl'  />}
 
 
-          <span className='text-sm 2xl:text-base flex items-center gap-1'>
+          <span className='text-sm flex items-center gap-1'>
             Sort by <span className='hidden 2xl:inline'>:</span>
 
             <span onClick={()=>{
@@ -129,8 +129,8 @@ export default function TodoHeader() {
 
       <div className='flex items-center gap-2 rounded-lg py-2 sm:p-2'>
         <div className='flex gap-1 items-center'>
-          <CiFilter className='2xl:text-xl text-xl'  />
-          <span className='text-sm 2xl:text-base flex items-center gap-1'>
+          <CiFilter className='text-xl'  />
+          <span className='text-sm flex items-center gap-1'>
             Filter <span className='hidden 2xl:inline'>:</span>
              <span onClick={()=>{
               setShowFilterOptions(true)

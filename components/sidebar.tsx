@@ -49,7 +49,7 @@ export default function Sidebar() {
             </div>
 
             <div className='flex flex-row xl:flex-col  w-full p-6 px-0 text-center 2xl:gap-8 gap-4 justify-center items-center '>
-                <SidebarItem name = "Todo" link="/" icon = {<GrHomeRounded  />} openSideBar = {openBarRedux}/>
+                <SidebarItem name = "Todo" link="/" icon = {<GrHomeRounded   />} openSideBar = {openBarRedux}/>
                 <SidebarItem name = "My Day" link="/myday" icon = {<CiCalendar />} openSideBar = {openBarRedux}/>
                 <SidebarItem name = "Upgrades" link="/upgrades" icon = {<GiUpgrade />} openSideBar = {openBarRedux} />
                 <SidebarItem name = "Avatar" link="/avatar" icon ={<RxAvatar />} openSideBar = {openBarRedux} />
@@ -57,8 +57,8 @@ export default function Sidebar() {
             </div>
         </div>
 
-        <div className='px-6 mb-8'>
-            <Image alt='logo' src={'/logo/questlog.png'} width={70} height={70}/>
+        <div className='px-6 mb-8 relative w-16 h-16'>
+            <Image alt='logo' src={'/logo/questlog.png'} fill objectFit='contain'/>
         </div>
 
         

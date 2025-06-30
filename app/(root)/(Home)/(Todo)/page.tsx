@@ -41,7 +41,7 @@ const handlechangeBar = () => {
 
             <div className="flex-1 w-full xl:max-w-64 2xl:max-w-full h-full flex flex-col-reverse xl:flex-col items-center bg-secondary justify-between "> 
               <div className="xl:min-h-screen flex flex-col-reverse xl:flex-col items-center justify-between">
-                <Calendar  className="w-full sm:w-xl xl:w-64  2xl:w-full text-xs sm:text-sm 2xl:text-base bg-secondary p-4 mt-7"/>
+                <Calendar  className="w-full sm:w-xl xl:w-64  2xl:w-full text-xs sm:text-sm bg-secondary p-4 mt-7"/>
 
                 <div className="mb-32 xl:pt-0 pt-20 flex justify-center items-center">
                   <Quotebar/>

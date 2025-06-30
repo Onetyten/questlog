@@ -21,7 +21,7 @@ export default function SidebarItem(prop:sidebarItemProps) {
     const activeLink = "/"+subRoute
 
   return (
-    <Link href={link} className={`${activeLink===link?"text-primary":"text-foreground"}  flex w-full ${openSideBar?"2xl:text-base text-sm gap-6 justify-start pl-8":"justify-center "} items-center`} >
+    <Link href={link} className={`${activeLink===link?"text-primary":"text-foreground"}  flex w-full ${openSideBar?" text-sm gap-6 justify-start pl-8":"justify-center "} items-center`} >
               {icon?(icon):(< MdKeyboardDoubleArrowLeft/>)}
               {openSideBar&&name}          
     </Link>

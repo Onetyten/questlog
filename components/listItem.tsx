@@ -115,7 +115,7 @@ export default function ListItem(prop:TaskPropType) {
                     <input
                         type="checkbox"
                         checked={isChecked}
-                        className="2xl:size-6 size-4 bg-foreground checked:bg-foreground"
+                        className=" size-4 bg-foreground checked:bg-foreground"
                         onChange={async (e) => {
                             const checked = e.target.checked;
                             setIsChecked(checked);
@@ -143,9 +143,9 @@ export default function ListItem(prop:TaskPropType) {
                     
                         {showDetailBox&&(
                         <OutsideClickHandler  onOutsideClick={() => { setShowDetailBox(false)}} >
-                            <div className='text-base absolute top-8 z-20 text-center bg-secondary -left-10 shadow-md flex flex-col rounded-sm '>
+                            <div className='text-sm absolute top-8 z-20 text-center bg-secondary -left-10 shadow-md flex flex-col rounded-sm '>
                                 {!isChecked&&(
-                                    <p className='hover:bg-primary p-2 px-6 w-full rounded-t-sm' onClick={()=>{setEditTextShow(!editTextShow)}}>
+                                    <p className='hover:bg-primary p-1 px-6 w-full rounded-t-sm' onClick={()=>{setEditTextShow(!editTextShow)}}>
                                         Edit
                                     </p>   
                                 )}
@@ -154,7 +154,7 @@ export default function ListItem(prop:TaskPropType) {
                                         Open
                                     </p>   
                                 )}
-                                <p className={`hover:bg-red-600 ${isChecked?"rounded-xl":"rounded-b-xl"} p-2 px-6 w-full rounded-b-sm`} onClick={()=>{deleteTask()}}>
+                                <p className={`hover:bg-red-600 ${isChecked?"rounded-sm":"rounded-b-sm"} p-1 px-6 w-full rounded-b-sm`} onClick={()=>{deleteTask()}}>
                                     Delete
                                 </p>
                             </div>
@@ -171,7 +171,7 @@ export default function ListItem(prop:TaskPropType) {
             <div className='flex 2xl:gap-6 xl:gap-2 gap-1 w-full'>
                 
                 
-                <div className='flex 2xl:text-md text-sm w-full flex-col 2xl:gap-3 gap-1 items-start'>
+                <div className='flex text-sm w-full flex-col 2xl:gap-3 gap-1 items-start'>
                     <div className='flex w-full'>
                        {!editTextShow?
                        ( <div>
@@ -290,7 +290,7 @@ export default function ListItem(prop:TaskPropType) {
                         childrenTodo.length>0?(
                              <p className='text-primary'>
                                {!showAll&&
-                                <span>
+                                <span className='text-xs'>
                                     {childrenTodo.length} subtask{childrenTodo.length>1&& <span>s</span>}
                                 </span>
                                } 
@@ -306,7 +306,7 @@ export default function ListItem(prop:TaskPropType) {
                     
                     {level<= 2 && showAll &&!isChecked&&(
                         <div className='flex flex-col justify-start items-start'>
-                            <div className='p-2 my-2 hover:bg-purple-600 bg-primary text-background rounded-lg flex items-center gap-1 2xl:text-md text-xs' onClick={()=>{setShowSubTaskInput(!showSubTaskInput)}}>
+                            <div className='p-2 my-2 hover:bg-purple-600 bg-primary text-background rounded-sm flex items-center gap-1 text-xs' onClick={()=>{setShowSubTaskInput(!showSubTaskInput)}}>
                                {!showSubTaskInput?<IoMdAdd/>:<IoMdRemove/>}
                                 Add subtask  
                             </div>
