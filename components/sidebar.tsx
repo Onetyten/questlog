@@ -34,12 +34,12 @@ export default function Sidebar() {
                 <div className={`flex gap-4 items-center w-full ${openBarRedux?'justify-start':'justify-center'} `}>
                     <Avatar className='2xl:size-12 size-10'>
                         <AvatarImage/>
-                        <AvatarFallback className='bg-background text-foreground'>{userRedux.name.slice(0,2).toUpperCase()}</AvatarFallback>
+                        <AvatarFallback className='bg-background text-foreground'>{userRedux?.name?.slice(0,2).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     {openBarRedux&&(
                         <p className='2xl:text-lg'>
-                            {userRedux.name.slice(0,20)}
-                            {userRedux.name.length>20?"....":""}
+                            {userRedux?.name?.slice(0,20)}
+                            {userRedux?.name?.length>20?"....":""}
                         </p>  
                     )}
                           

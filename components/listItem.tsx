@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { IoMdAdd,IoMdRemove } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 import Select from 'react-select'
@@ -12,6 +12,8 @@ import InputTodo from './inputTodo';
 import { LuChevronsUpDown } from "react-icons/lu";
 import { openModal } from '@/store/showChildModalSlice/showChildModalSlice';
 import { setModalId } from '@/store/modalIdSlice/modalIdSlice';
+import { CiCalendar } from "react-icons/ci";
+
 
 
 interface TaskPropType {
@@ -31,6 +33,7 @@ interface TaskPropType {
 
 export default function ListItem(prop:TaskPropType) {
     const {title,priority,status,_id,dueDate,parent_id,level} = prop
+  const dateInputRef = useRef<HTMLInputElement>(null)
     const todoRedux = useSelector((state:RootState)=>state.todo)
     const dispatch = useDispatch()
     function formatDueDate(dueDate: string | null): string {
@@ -204,22 +207,36 @@ export default function ListItem(prop:TaskPropType) {
                     {showAll && !isChecked&&(
                         <div className='flex gap-6 items-center w-full'>
                             <div className='flex items-center gap-2'>
-                                {/* <CiCalendar className='text-2xl' /> */}
-                                <input type="date" name="" id="" className='size-6' onChange={async (e)=>{
-                                    const updatedDate = new Date(e.target.value).toISOString()
-                                     try {
-                                        const res = await api.patch(`/api/task/edit/${_id}`, { dueDate:updatedDate});
-                                        if (res.data?.success) {
-                                            dispatch(updateTodo(res.data.updatedTask));
-                                            console.log("date updated to", updatedDate);
-                                        }
+                                <button
+                                type="button"
+                                onClick={() => dateInputRef.current?.showPicker()}
+                                className='text-2xl cursor-pointer'
+                                >
+                                <CiCalendar />
+                                </button>
+
+                                <input
+                                ref={dateInputRef}
+                                type="date"
+                                id="calendar-input"
+                                className='sr-only' // visually hidden but still usable
+                                onChange={async (e) => {
+                                    const updatedDate = new Date(e.target.value).toISOString();
+                                    try {
+                                    const res = await api.patch(`/api/task/edit/${_id}`, {
+                                        dueDate: updatedDate,
+                                    });
+                                    if (res.data?.success) {
+                                        dispatch(updateTodo(res.data.updatedTask));
+                                        console.log('date updated to', updatedDate);
                                     }
-                                    catch (error) {
+                                    } catch (error) {
                                     console.error(error);
                                     }
-                                }} />
-                                {
-                                <p className='2xl:text-md text-xs'>{formatDueDate(dueDate)}</p>}
+                                }}
+                                />
+
+                                <p className='2xl:text-md text-xs'>{formatDueDate(dueDate)}</p>
                             </div>
 
                             <div className='rounded-lg'>
