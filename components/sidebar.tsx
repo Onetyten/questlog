@@ -30,7 +30,7 @@ export default function Sidebar() {
   return (
     <div className={`bg-background border-r-2 xl:flex  flex-row xl:flex-col box-content hidden justify-between border-secondary min-h-screen h-full ${openBarRedux?'w-full xl:w-44 2xl:w-60':'xl:w-20 w-full'}  top-0 left-0`}>
         <div className='w-full'>
-            <div className='flex justify-between items-center relative border-b-2 h-20 px-6'> 
+            <div className='flex justify-between items-center relative border-secondary border-b-2 h-20 px-6'> 
                 <div className={`flex gap-4 items-center w-full ${openBarRedux?'justify-start':'justify-center'} `}>
                     <Avatar className='2xl:size-12 size-10'>
                         <AvatarImage/>

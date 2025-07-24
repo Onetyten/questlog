@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function MyDay() {
 
-
   return (
      <div className="flex flex-nowrap flex-col xl:flex-row w-full bg-background xl:overflow-scroll">
 

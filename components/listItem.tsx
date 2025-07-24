@@ -10,9 +10,9 @@ import { deleteTodo, updateTodo } from '@/store/todoSlice/todoSlice';
 import OutsideClickHandler from 'react-outside-click-handler';
 import InputTodo from './inputTodo';
 import { LuChevronsUpDown } from "react-icons/lu";
-import { openModal } from '@/store/showChildModalSlice/showChildModalSlice';
 import { setModalId } from '@/store/modalIdSlice/modalIdSlice';
 import { CiCalendar } from "react-icons/ci";
+import Link from 'next/link';
 
 
 
@@ -32,6 +32,7 @@ interface TaskPropType {
 
 
 export default function ListItem(prop:TaskPropType) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {title,priority,status,_id,dueDate,parent_id,level} = prop
   const dateInputRef = useRef<HTMLInputElement>(null)
     const todoRedux = useSelector((state:RootState)=>state.todo)
@@ -101,24 +102,19 @@ export default function ListItem(prop:TaskPropType) {
     }
 
 
-    function openChildModal(){
-        dispatch(setModalId(_id))
-        dispatch(openModal()) 
-    }
-
 
 
 
 
   return (
     showTask &&(
-        <div className={` sm:w-full flex-grow ${parent_id?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
+        <div className={` sm:w-full flex-grow ${level!==0?"border-y-2 sm:pl-4 md:pl-6 rounded-none":"border-2 rounded-sm 2xl:rounded-lg"} border-secondary flex flex-col gap-2  py-3 pl-3`}>
             <div className='flex flex-row justify-between w-full'>
                 <div >
                     <input
                         type="checkbox"
                         checked={isChecked}
-                        className=" size-4 bg-foreground checked:bg-foreground"
+                        className=" size-4 bg-foreground cursor-pointer checked:bg-foreground"
                         onChange={async (e) => {
                             const checked = e.target.checked;
                             setIsChecked(checked);
@@ -135,29 +131,28 @@ export default function ListItem(prop:TaskPropType) {
                             }
                         }}
                         />
-
                 </div>
 
                
                 <div className={`flex gap-3 pr-3 `}>
                     <div className='text-xl relative'>
                 
-                        <BsThreeDots onClick={()=>{setShowDetailBox(!showDetailBox)}}/>
+                        <BsThreeDots onClick={()=>{setShowDetailBox(!showDetailBox)}} className='cursor-pointer'/>
                     
                         {showDetailBox&&(
                         <OutsideClickHandler  onOutsideClick={() => { setShowDetailBox(false)}} >
                             <div className='text-sm absolute top-8 z-20 text-center bg-secondary -left-10 shadow-md flex flex-col rounded-sm '>
                                 {!isChecked&&(
-                                    <p className='hover:bg-primary p-1 px-6 w-full rounded-t-sm' onClick={()=>{setEditTextShow(!editTextShow)}}>
+                                    <p className='hover:bg-primary cursor-pointer pt-2 p-1 px-6 w-full rounded-t-sm' onClick={()=>{setEditTextShow(!editTextShow)}}>
                                         Edit
                                     </p>   
                                 )}
                                 {!isChecked&& childrenTodo.length>0&&(
-                                    <p onClick={()=>{openChildModal()}} className='hover:bg-primary p-2 px-6 w-full'>
+                                    <Link onClick={()=>{dispatch(setModalId(_id))}} href='/taskDetails' className='hover:bg-primary cursor-pointer p-2 px-6 w-full'>
                                         Open
-                                    </p>   
+                                    </Link>   
                                 )}
-                                <p className={`hover:bg-red-600 ${isChecked?"rounded-sm":"rounded-b-sm"} p-1 px-6 w-full rounded-b-sm`} onClick={()=>{deleteTask()}}>
+                                <p className={`hover:bg-red-600 ${isChecked?"rounded-sm":"rounded-b-sm"} pb-2 p-1 cursor-pointer px-6 w-full rounded-b-sm`} onClick={()=>{deleteTask()}}>
                                     Delete
                                 </p>
                             </div>
@@ -165,7 +160,7 @@ export default function ListItem(prop:TaskPropType) {
                         )}
                     </div>
 
-                    <div className='flex gap-3 text-xl right-3'>
+                    <div className='flex gap-3 text-xl right-3 cursor-pointer'>
                         <LuChevronsUpDown onClick={()=>{setShowAll(!showAll)}} />
                     </div>
                 </div>
@@ -323,7 +318,7 @@ export default function ListItem(prop:TaskPropType) {
                     
                     {level<= 2 && showAll &&!isChecked&&(
                         <div className='flex flex-col justify-start items-start'>
-                            <div className='p-2 my-2 hover:bg-purple-600 bg-primary text-background rounded-sm flex items-center gap-1 text-xs' onClick={()=>{setShowSubTaskInput(!showSubTaskInput)}}>
+                            <div className='p-2 my-2 hover:bg-purple-400 cursor-pointer bg-primary text-background rounded-sm flex items-center gap-1 text-xs' onClick={()=>{setShowSubTaskInput(!showSubTaskInput)}}>
                                {!showSubTaskInput?<IoMdAdd/>:<IoMdRemove/>}
                                 Add subtask  
                             </div>

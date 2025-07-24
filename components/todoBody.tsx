@@ -2,8 +2,6 @@ import React from 'react'
 import TodoHeader from './todoHeader'
 import TodoList from './todoList'
 import TodoFooter from './todoFooter'
-import TaskModal from './taskModal'
-
 
 
 export default function TodoBody() {
@@ -13,11 +11,7 @@ export default function TodoBody() {
             <TodoHeader/>
             <TodoList/>
             <TodoFooter/>
-        </div>
-
-        <TaskModal/>
-
-        
+        </div>        
 
     </div>
   )
