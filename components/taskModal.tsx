@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import ModalListItem from './modalListItem';
 
-export default function ChildTaskModal() {
+export default function TaskModal() {
     const showChildModal = useSelector((state:RootState)=>state.showChildModal.showChildModal)
     const modalRedux_id = useSelector((state:RootState)=>state.modalId.modalId)
     const todoRedux = useSelector((state:RootState)=>state.todo)
@@ -18,11 +18,13 @@ export default function ChildTaskModal() {
   return (
     <div>
         {showChildModal && (
-            <div className="fixed  z-60 -top-1 left-0 no-scrollbar w-full h-screen flex justify-center items-center flex-col gap-6 no-scrollbar ">
+            <div className="fixed  z-80 top-16 xl:pr-96 2xl:pr-sm left-0 no-scrollbar w-full h-screen flex justify-center items-center flex-col gap-6 no-scrollbar ">
                 <div className='w-full bg-background relative h-full flex flex-col justify-center items-center overflow-scroll no-scrollbar'>
-                    
-                    <IoIosClose onClick={()=>{dispatch(closeModal())}} className='absolute top-0 left-0 text-5xl hover:text-primary cursor-pointer' />
-                    <p className='text-base xl:text-xl 2xl:text-2xl text-primary'> {parentTodo?.title}</p> 
+                    <div className='w-full flex justify-center items-center border-b-[1px] border-primary'>
+                        <IoIosClose onClick={()=>{dispatch(closeModal())}} className='absolute top-1 left-0 text-3xl md:text-5xl hover:text-primary cursor-pointer' />
+                        <p className='text-base xl:text-xl 2xl:text-2xl text-primary py-3 xl:py-6'> {parentTodo?.title}</p> 
+                    </div>
+
                     <div className=' flex flex-col justify-start gap-6 w-[90%] xl:w-[60%] 2xl:w-[40%] h-[90%] no-scrollbar overflow-scroll py-16 pb-32 sm:p-16'>
                         {unCompletedTodos.map((item)=>{
                         return(

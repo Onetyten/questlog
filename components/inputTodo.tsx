@@ -2,9 +2,11 @@
 import api from '@/lib/api'
 import { RootState } from '@/store'
 import { addTodo, deleteTodo, replaceTodo } from '@/store/todoSlice/todoSlice'
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
+import { CiCalendar } from 'react-icons/ci'
+import { toast } from 'react-toastify'
 
 
 interface InputType{
@@ -14,6 +16,7 @@ interface InputType{
 export default function InputTodo(prop:InputType) {
     const {parent_id} = prop
     const dispatch = useDispatch()
+    const dateInputRef = useRef<HTMLInputElement>(null)
     const userData = useSelector((state:RootState)=>state.user)
     // const taskRedux = useSelector((state:RootState)=>state.todo)
 
@@ -36,14 +39,18 @@ export default function InputTodo(prop:InputType) {
     const [selectedPriority,setSelectedPriority] = useState(defaultPriority||null)
 
 
-    async function submitTask () {
-        
-        if (title.length>0){
+    async function submitTask (e:React.FormEvent<HTMLFormElement>) {
+
+        e.preventDefault()
+        const submittedTitle = title
+        setTitle("")
+
+        if (submittedTitle.length>0){
             setShowTaskError(false)
             const newTodo={
                 user_id: userData._id,
                 parent_id: parent_id,
-                title: title,
+                title: submittedTitle,
                 status:selectedStatus?.value ?? null,
                 priority:selectedPriority?.value ?? null,
                 dueDate:dueDate.toISOString(),
@@ -54,16 +61,15 @@ export default function InputTodo(prop:InputType) {
             const TempId = action.payload._id
             try {
                 
-                const res = await api.post('/api/task/add', {title,status:selectedStatus?.value,priority:selectedPriority?.value,dueDate:dueDate.toISOString(),parent_id: parent_id})
+                const res = await api.post('/api/task/add', {title:submittedTitle,status:selectedStatus?.value,priority:selectedPriority?.value,dueDate:dueDate.toISOString(),parent_id: parent_id})
                 if (res.data.success == false){
                     dispatch(deleteTodo(action.payload))
-                    return alert ("Add task operation failed")
+                    return toast ("Add task operation failed")
                     
                 }
                 else
-                {
+                {   
                     const savedTask = res.data.data
-                    console.log(savedTask)
                     dispatch(replaceTodo({ Temp_id: TempId, newTodo: savedTask }))
                 }
             }
@@ -82,22 +88,23 @@ export default function InputTodo(prop:InputType) {
   return (
         <div className=' border-2 mb-9 border-secondary rounded-lg flex 2xl:pl-12 pl-4 2xl:p-6 p-2 w-full'>
 
-            <div className='flex flex-col gap-4 sm:gap-1 items-start'>
+            <form onSubmit={submitTask} className='flex flex-col gap-4 sm:gap-1 items-start'>
 
-                <div className='flex gap-1 flex-col'>
-                    <input type="text" placeholder='Add new task' className='border-2 2xl:text-md text-xs border-secondary 2xl:p-3 p-2 w-full 2xl:rounded-lg rounded-sm' onChange={(e)=>{setTitle(e.target.value)}} />
-                    {showTaskError&& <p className='text-sm text-red-600'>Add your task description</p>}
+                <div className='flex gap-2 flex-col'>
+                    <input type="text" value={title} placeholder='Add new task' className='border-2 2xl:text-md text-xs border-secondary 2xl:p-3 p-2 w-full 2xl:rounded-lg rounded-sm' onChange={(e)=>{setTitle(e.target.value)}} />
+                    {showTaskError&& <p className='text-xs text-red-600'>Add your task description</p>}
                     
                 </div>
 
                 <div className='flex flex-col sm:flex-row 2xl:gap-6 gap-6 sm:gap-2 items-start mt-3 sm:items-center'>
                     <div className='flex 2xl:text-md text-xs items-center gap-2'>
                         DueDate :
-                        {/* <CiCalendar className='text-2xl' /> */}
-                        <input type="date" min={new Date().toISOString().split("T")[0]} name="" id="" className='size-5' onChange={(e)=>{
+                        <button type="button" className='text-2xl cursor-pointer' >
+                            <CiCalendar onClick={() => dateInputRef.current?.showPicker()} />
+                        </button>
+                        <input type="date" ref={dateInputRef} min={new Date().toISOString().split("T")[0]} name="" id="" className='size-5 sr-only' onChange={(e)=>{
                             const todaysDate = new Date()
                             const changedDate = new Date(e.target.value)
-
                             todaysDate.setHours(0,0,0,0)
                             changedDate.setHours(0,0,0,0)
                             
@@ -105,7 +112,7 @@ export default function InputTodo(prop:InputType) {
                                 setDuedate(new Date(e.target.value))
                             }
                             else{
-                                alert("Your due date cant be in the past")
+                                toast("Your due date cant be in the past")
                             }
                             
                         }}/>
@@ -138,11 +145,11 @@ export default function InputTodo(prop:InputType) {
                 </div>
 
                 <div className='2xl:text-md text-xs'>
-                    <div onClick={()=>{submitTask()}} className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-sm text-xs flex items-center gap-2'>
+                    <button type='submit' className='p-2 px-4 mt-2 hover:bg-purple-600 bg-primary text-background rounded-sm text-xs flex items-center gap-2'>
                         Add Task 
-                    </div>
+                    </button>
                 </div>
-            </div>
+            </form>
             
         </div>
   )

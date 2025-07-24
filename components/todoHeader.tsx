@@ -119,8 +119,8 @@ export default function TodoHeader() {
         </div>
 
         <div className={`flex ${showSortOPtions?'flex':'hidden xl:flex'} items-center gap-2`}>
-            <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24 text-black' />
-            <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24  text-black' />
+            <Select options={sortOptions} value={selectedSortOption} onChange={setSelectedSortOption} className=' w-24 cursor-pointer text-black' />
+            <Select options={orderOptions} value={selectedOrder} onChange={setSelectedOrder} className=' w-24  text-black cursor-pointer' />
              <span onClick={()=>{ setShowSortOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
         </div>
         

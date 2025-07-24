@@ -14,7 +14,7 @@ export default function RouteHamburger(props:propType) {
     const {setShowMobileHamburger} = props
   return (
     <OutsideClickHandler  onOutsideClick={() => {setShowMobileHamburger(false) }}>
-        <div className='absolute right-8 top-8 bg-secondary py-5 text-sm flex flex-col z-20 rounded-md'>
+        <div className='absolute right-3 top-3 bg-secondary shadow-lg text-sm flex flex-col z-20 rounded-sm'>
             <MobileSidebarItem link="/"  name = "Todo" icon = {<GrHomeRounded  />}/>
             <MobileSidebarItem link="myday"  name = "My Day" icon = {<CiCalendar />}/>
             <MobileSidebarItem link="/upgrades"  name = "Upgrades" icon = {<GiUpgrade />}/>
