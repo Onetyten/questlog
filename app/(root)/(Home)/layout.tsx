@@ -5,6 +5,7 @@ import {store,persistor} from "@/store"
 import { PersistGate } from "redux-persist/integration/react"
 import React from 'react'
 import MobileRoutes from "@/components/mobileRoutes"
+import HeaderComponent from "@/components/headerComponent"
 
 export default function layout({children}:Readonly<{children:React.ReactNode}>) {
 
@@ -18,6 +19,7 @@ export default function layout({children}:Readonly<{children:React.ReactNode}>) 
                   <div className="flex-1 h-full flex fixed left-0 flex-col-reverse xl:flex-col items-center justify-between">
                     <Sidebar/>
                   </div>
+                  <HeaderComponent/>
   
                   <MobileRoutes/>
                   <div className="overflow-y-scroll w-screen max-w-screen overflow-x-hidden">
@@ -35,10 +37,3 @@ export default function layout({children}:Readonly<{children:React.ReactNode}>) 
 
 }
 
-  // return (
-  //   <div>
-  //       gggg
-  //       {children}
-        
-  //   </div>
-  // )
