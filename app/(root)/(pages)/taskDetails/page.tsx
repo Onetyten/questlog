@@ -27,7 +27,7 @@ export default function TaskDetails() {
 
 
   return (
-    <div className="no-scrollbr w-full h-screen flex justify-center items-center flex-col gap-6 no-scrollbar ">
+    <div className="no-scrollbr w-full font-play-write h-screen flex justify-center items-center flex-col gap-6 no-scrollbar ">
         <div className='w-full bg-background relative h-full flex flex-col justify-center items-center overflow-scroll no-scrollbar'>
             <div className='w-full flex-col flex justify-center items-center border-b-2 border-secondary'>
                 <div className='w-full flex justify-start italic'>
