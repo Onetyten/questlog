@@ -9,7 +9,7 @@ export default function layout({children}:{children:React.ReactNode}) {
   return (
     <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <main>
+            <main className='playwrite-text'>
                 {children}
             </main>
         </PersistGate>

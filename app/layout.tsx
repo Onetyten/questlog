@@ -1,9 +1,8 @@
-
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+// Import all the fonts you intend to use
+import { Geist, Geist_Mono, Montserrat, Playwrite_DE_Grund, Raleway } from "next/font/google";
 import "./globals.css";
-import { ToastContainer } from 'react-toastify'
-
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +13,25 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: 'swap',
+  variable: "--font-montserrat",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  display: 'swap',
+  variable: "--font-raleway",
+});
+
+const playwriteDEG = Playwrite_DE_Grund({
+    display: 'swap',
+    variable: '--font-playwrite-deg',
+
+});
+
 
 export const metadata: Metadata = {
   title: "Questlog",
@@ -27,16 +45,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${raleway.variable} ${playwriteDEG.variable} antialiased`}
+      >
         {children}
-        <ToastContainer 
+        <ToastContainer
           position="top-right"
           autoClose={2000}
           hideProgressBar={true}
           newestOnTop={true}
           closeOnClick={false}
           rtl={false}
-          />
+        />
       </body>
     </html>
   );
