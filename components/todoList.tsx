@@ -1,46 +1,18 @@
 import React, { useEffect } from 'react'
 import ListItem from './listItem'
-import api from '@/lib/api'
-import { useDispatch, useSelector } from 'react-redux'
-import { setTodos } from '@/store/todoSlice/todoSlice'
+import {useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
 
 
 export default function TodoList() {
   const todoRedux = useSelector((state:RootState)=>state.todo)
-  const dispatch = useDispatch()
-
-  console.log("Todo redux: ",todoRedux)
-
-
-  async function fetchTasks() {
-
-    try {
-      const res = await api.get(`/api/task/fetch`, {
-        validateStatus: function (status) {
-          return status >= 200 && status < 300 || status === 404;
-        },
-      })
-      const data =  res.data
-      if (data.success == true){
-        if (data.tasks.length>0){
-          dispatch(setTodos(data.tasks))
-        }
-      }
-      console.log(res.data)
-      
-    } catch (error) {
-      console.log(error)
-    }
-  }
   const loneTodos = todoRedux.filter((todo)=>todo.parent_id == null )
-
   const unCompletedTodos = loneTodos.filter((todo)=>todo.status !== "completed" )
   const completedTodos = loneTodos.filter((todo)=>todo.status == "completed" )
 
   useEffect(()=>{
-    fetchTasks()
+    // fetchTasks()
   },[])
   return (
     <div className='sm:mt-6 flex flex-col gap-6'>

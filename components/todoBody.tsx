@@ -9,7 +9,7 @@ export default function TodoBody() {
   return (
     <div className='flex items-center mt-6 flex-col  text-sm relative'>
         <div className='mb-32 2xl:w-4xl xl:w-2xl sm:w-xl w-[95%] flex flex-col gap-2'>
-            {/* <TodoHeader/> */}
+            <TodoHeader/>
             <TodoList/>
             <TodoFooter/>
         </div>        

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { CiFilter } from "react-icons/ci";
@@ -94,14 +95,12 @@ export default function TodoHeader() {
     }
   }
 
-
-
   useEffect(() => {
     fetchTasks();
   }, [selectedSortOption, selectedOrder, selectedPriority, selectedStatus, selectedDateFilter]);
 
   return (
-    <div className='flex gap-2 sm:items-center items-start justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap '>
+    <div className='flex gap-2 sm:items-center items-start mt-2 md:mt-4 justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap '>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
         <div className='flex gap-1 items-center text-sm 2xl:text-base'>
@@ -142,8 +141,8 @@ export default function TodoHeader() {
 
 
         <div className={`flex ${showFilterOptions?'flex':'hidden xl:flex'} items-center gap-2`}>
-          <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24  text-black' />
-          <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24 hidden sm:inline  text-black'/>
+          {/* <Select options={priorityOptions} placeholder="Priority" value={selectedPriority} onChange={setSelectedPriority} isClearable className='w-24  text-black' /> */}
+          {/* <Select options={statusOptions} placeholder="Status" value={selectedStatus} onChange={setSelectedStatus} isClearable className='w-24 hidden sm:inline  text-black'/> */}
           <Select options={dateFilters} placeholder="Date" value={selectedDateFilter} onChange={setSelectedDateFilter} isClearable className='w-24  text-black' />
           <span onClick={()=>{ setShowFilterOptions(false) }} className='flex xl:hidden text-xl' ><FaCaretLeft /></span>
         </div>

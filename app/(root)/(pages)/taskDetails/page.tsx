@@ -31,7 +31,7 @@ export default function TaskDetails() {
         <div className='w-full bg-background relative h-full flex flex-col justify-center items-center overflow-scroll no-scrollbar'>
             <div className='w-full flex-col flex justify-center items-center border-b-2 border-secondary'>
                 <div className='w-full flex justify-start italic'>
-                      <HiArrowNarrowLeft onClick={BackToHome} className=' ml-3 mt-3 top-1 left-0 text-3xl md:text-3xl hover:text-primary cursor-pointer' />
+                      <HiArrowNarrowLeft onClick={BackToHome} className=' ml-3 mt-3 top-1 left-0 text-2xl hover:text-primary cursor-pointer' />
                 </div>
                 
                 <p className='text-base xl:text-xl 2xl:text-2xl text-primary py-3 xl:py-6'> {parentTodo?.title}</p> 
