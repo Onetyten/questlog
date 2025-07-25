@@ -100,7 +100,7 @@ export default function TodoHeader() {
   }, [selectedSortOption, selectedOrder, selectedPriority, selectedStatus, selectedDateFilter]);
 
   return (
-    <div className='flex gap-2 sm:items-center items-start mt-2 md:mt-4 justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap '>
+    <div className='hidden sm:flex gap-2 sm:items-center items-start mt-0 md:mt-4 justify-start  sm:justify-between text-xs flex-col sm:flex-row flex-wrap '>
       <div className='flex items-center gap-2 text-left rounded-lg'>
 
         <div className='flex gap-1 items-center text-sm 2xl:text-base'>

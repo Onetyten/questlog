@@ -1,27 +1,20 @@
 'use client'
+import Image from 'next/image'
 import React from 'react'
 
 export default function Avatar() {
 
 
   return (
-     <div className="flex flex-nowrap flex-col xl:flex-row w-full bg-background xl:overflow-scroll">
-
-          
-        <div className="flex 2xl:flex-3 xl:flex-2 flex-col">
-            <div className="border-b-2 border-secondary min-h-20 flex pl-5 items-center">
-            <div className="flex w-full items-center justify-between mr-10">
-                <p className="ml-6 text-3xl text-primary ">
-                    Avatar
-                </p>
-                
-                
-
+     <div className=" bg-background overflow-y-scroll">
+            <div className='min-h-screen flex justify-center items-center flex-col gap-5 w-full'>
+                <div className='text-2xl md:text-4xl xl:text-5xl text-secondary'>
+                    In development
+                </div>
+                <div className='relative size-48 md:size-60 xl:size-72'>
+                    <Image src={'/logo/DevAtWork.webp'} alt='Men at work' className='object-contain' fill/>
+                </div>
             </div>
-
-            </div>
-            {/* <TodoBody/> */}
-        </div>
 
     </div>
   )
